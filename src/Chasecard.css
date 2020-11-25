@@ -11,3 +11,8 @@
   font-size: 80%;
   margin: 1px;
 }
+
+.Chasecard-banned {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
