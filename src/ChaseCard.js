@@ -1,24 +1,11 @@
-import React, { useCallback } from "react";
+import React from "react";
 import "./Chasecard.css";
 
-function ChaseCard({ id, name, img, onClick, players, allowStyle, banned, charsBan }) {
+function ChaseCard({ name, img, onClick, banned, charsBan, style }) {
   let classNameBan = "";
-
-  // const getBanClass = useCallback(() => {
-  //   console.log(charsBan);
-  //   // return charsBan.filter((item) => item.id === id).length > 1
-  // }, [charsBan])
 
   if (banned) classNameBan = "Chasecard-banned";
   if (charsBan) classNameBan += "Chasecard-ban";
-  // if (players.player2.ban === id) classNameBan = "Chasecard-banned";
-
-  let style = {};
-
-  // if (allowStyle) {
-  //   if (players.player1.char.id === id) style = { borderColor: "red" };
-  //   if (players.player2.char.id === id) style = { borderColor: "blue" };
-  // }
 
   return (
     <div

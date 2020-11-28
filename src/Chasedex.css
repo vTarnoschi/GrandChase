@@ -2,3 +2,23 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.btn-reset {
+  padding: 8px;
+  min-width: 100px;
+  margin: 10px 0;
+  border: 1px solid;
+  background: transparent;
+  border-radius: 6px;
+  color: #441e85;
+  border-color: #441e85;
+  cursor: pointer;
+}
+
+.btn-reset:focus {
+  outline: 0;
+}
+
+.btn-reset:hover {
+  transform: scale(1.1);
+}

@@ -4,15 +4,21 @@ import chase from "./Chase.js";
 import "./Chasedex.css";
 import Bans from "./Bans";
 
-const maxWidth = { maxWidth: `${window.innerWidth - 509}px` };
+const maxWidth = {
+  maxWidth: `${window.innerWidth - 920}px`,
+  display: "flex",
+  justifyContent: "center",
+};
 
 const initialState = {
   team1: {
+    color: "#ff4d4d",
     char: [],
     ban: [],
     turn: true,
   },
   team2: {
+    color: "#3333ff",
     char: [],
     ban: [],
     turn: false,
@@ -116,24 +122,53 @@ function ChaseDex() {
   };
 
   const getBanClass = (id) => {
-    const charsBan = [...state.team1.ban, ...state.team2.ban]
+    const charsBan = [...state.team1.ban, ...state.team2.ban];
 
-    console.log(charsBan.filter((item) => item.id === id).length > 1);
+    return charsBan.some((item) => item.id === id);
+  };
 
-    return charsBan.some((item) => item.id === id)
-  }
+  const getStyle = (id) => {
+    if (state.team1.char.some((item) => item.id === id)) {
+      return {
+        backgroundColor: state.team1.color,
+        color: "#fff",
+        pointerEvents: "none"
+      };
+    }
+
+    if (state.team2.char.some((item) => item.id === id)) {
+      return {
+        backgroundColor: state.team2.color,
+        color: "#fff",
+        pointerEvents: "none"
+      };
+    }
+  };
+
+  const getChasedexStyle = () => {
+    if (state.team2.char.length === 2 && state.team1.char.length === 2) {
+      return {
+        pointerEvents: "none",
+        opacity: 0.8,
+      };
+    }
+
+    return {};
+  };
 
   return (
     <div className="Chasedex">
-      <button onClick={() => setState(initialState)}>Reset</button>
+      <button className="btn-reset" onClick={() => setState(initialState)}>Reset</button>
 
       <h1>Personagens</h1>
-      <div className="Chasedex-cards" style={maxWidth}>
+      <div
+        className="Chasedex-cards"
+        style={{ ...maxWidth, ...getChasedexStyle() }}
+      >
         {chase.map((g) => (
           <ChaseCard
-            allowStyle
             key={g.id}
-            players={state}
+            style={getStyle(g.id)}
             onClick={() => getOnClick(g)}
             id={g.id}
             name={g.name}
@@ -143,43 +178,6 @@ function ChaseDex() {
         ))}
       </div>
 
-      {console.log(state)}
-      {/* Players
-      {chase.map((g) => {
-        if (g.id === state.player1.char.id || g.id === state.team1.char.id) {
-          return (
-            <React.Fragment>
-              <ChaseCard
-                allowStyle={false}
-                key={g.id}
-                players={state}
-                id={g.id}
-                name={g.name}
-                img={g.img}
-              />
-            </React.Fragment>
-          );
-        }
-
-        return null;
-      })}
-
-        Ban phase
-      {chase.map((g) => {
-        if (g.id === state.player1.ban || g.id === state.team1.ban) {
-          return (
-            <ChaseCard
-              key={g.id}
-              players={state}
-              id={g.id}
-              name={g.name}
-              img={g.img}
-            />
-          );
-        }
-
-        return null;
-      })} */}
       <Bans charsBan={[...state.team1.ban, ...state.team2.ban]} />
     </div>
   );
