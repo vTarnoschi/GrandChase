@@ -1,10 +1,15 @@
 .Chasecard {
-  border: 2px solid mediumseagreen;
+  /* border: 2px solid; */
   width: 70px;
   height: 75px;
   padding: 10px;
   margin: 1px;
   text-align: center;
+  cursor: pointer;
+}
+
+.Chasecard:hover {
+  transform: scale(1.1);
 }
 
 .Chasecard-title {
@@ -12,7 +17,11 @@
   margin: 1px;
 }
 
-.Chasecard-banned {
+.Chasecard-ban {
   opacity: 0.5;
-  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.Chasecard-banned {
+  pointer-events: none;
 }
